@@ -6,6 +6,10 @@
 #include "MyFabricaNaves2.h"
 #include "MyFabricaNaves3.h"
 
+#include "IngenieroEspecialista1.h"
+#include "CapitanNavesNodrizas.h"
+#include "ConstruirNaveNodriza.h"
+
 AGalaga_USFX_L01GameMode::AGalaga_USFX_L01GameMode()
 {
 	// set default pawn class to our character class
@@ -67,8 +71,16 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 	FVector PosCaza = FVector(-600.0f,-600.0f,250.0f);
 	FVector PosTransporte = FVector(-400.0f, -600.0f, 250.0f);
 	FVector PosDestructor = FVector(-200.0f, -600.0f, 250.0f);
+
+	Ingeniero = GetWorld()->SpawnActor<AIngenieroEspecialista1>(AIngenieroEspecialista1::StaticClass());
+	Capitan = GetWorld()->SpawnActor<ACapitanNavesNodrizas>(ACapitanNavesNodrizas::StaticClass());
+
+	Capitan->OrdenarIngeniero(Ingeniero);
+	Capitan->ContruirNaveNodriza();
+
+	AConstruirNaveNodriza* Nodriza = Capitan->ObtenerNave();	
 	
-	for (int i = 0; i < 4; i++)
+	/*for (int i = 0; i < 4; i++)
 	{
 		ANaveEnemiga* Nave1 = FabricaCaza->OrdenarNaveEnemiga("Caza");
 		Nave1->SetActorLocation(PosCaza);
@@ -102,7 +114,7 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, TEXT("Tanques de Combustible Lleno"));
 	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, TEXT("Recargando Combustible"));
 	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, TEXT("Municiones Recargadas"));
-	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, TEXT("Recargando Municiones"));
+	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, TEXT("Recargando Municiones"));*/
 
 }
 
@@ -136,7 +148,7 @@ void AGalaga_USFX_L01GameMode::Tick(float DeltaTime)
 	FVector PosTransporte = FVector(200.0f, -600.0f, 250.0f);
 	FVector PosDestructor = FVector(400.0f, -600.0f, 250.0f);
 
-	if (Tiempo % 700 == 0)
+	/*if (Tiempo % 700 == 0)
 	{
 		AFabricaNaves* FabricaCaza = GetWorld()->SpawnActor<AMyFabricaNaves1>(AMyFabricaNaves1::StaticClass());
 		AFabricaNaves* FabricaTransporte = GetWorld()->SpawnActor<AMyFabricaNaves2>(AMyFabricaNaves2::StaticClass());
@@ -177,5 +189,5 @@ void AGalaga_USFX_L01GameMode::Tick(float DeltaTime)
 		FString CantidadComoTexto = FString::Printf(TEXT("%d"), Cantidad);
 		GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Green, TEXT("CANTIDAD DE NAVES LISTAS: ") + CantidadComoTexto);
 		GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Blue, TEXT("NAVES LISTAS PARA DESPEGAR"));
-	}
+	}*/
 }

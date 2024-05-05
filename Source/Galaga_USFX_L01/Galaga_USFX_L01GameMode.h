@@ -18,6 +18,10 @@ class AGalaga_USFX_L01GameMode : public AGameModeBase
 public:
 	AGalaga_USFX_L01GameMode();
 
+	class AIngenieroEspecialista1* Ingeniero;
+	class ACapitanNavesNodrizas* Capitan;
+
+
 public:
 
 	ANaveEnemigaTransporte* NaveEnemigaTransporte01;
