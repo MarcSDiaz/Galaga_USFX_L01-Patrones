@@ -19,6 +19,9 @@ public:
 	AGalaga_USFX_L01GameMode();
 
 	class AIngenieroEspecialista1* Ingeniero;
+	class AIngenieroEspecialista2* Ingeniero2;
+	class AIngenieroEspecialista3* Ingeniero3;
+
 	class ACapitanNavesNodrizas* Capitan;
 
 

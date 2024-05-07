@@ -23,8 +23,8 @@ class GALAGA_USFX_L01_API IInterfazNodriza
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
 
-	virtual void ImplementarNaveNodriza() = 0;
-	virtual void ImplementarEscudo() = 0;
-	virtual void ImplementarProyectiles() = 0;
-	virtual void ImplementarArmas() = 0;
+	virtual void ImplementarNaveNodriza(int z) = 0;
+	virtual void ImplementarEscudo(int x) = 0;
+	virtual void ImplementarProyectiles(int v) = 0;
+	virtual void ImplementarArmas(int w) = 0;
 };

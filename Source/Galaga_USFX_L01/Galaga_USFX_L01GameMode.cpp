@@ -7,6 +7,8 @@
 #include "MyFabricaNaves3.h"
 
 #include "IngenieroEspecialista1.h"
+#include "IngenieroEspecialista2.h"
+#include "IngenieroEspecialista3.h"
 #include "CapitanNavesNodrizas.h"
 #include "ConstruirNaveNodriza.h"
 
@@ -72,14 +74,32 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 	FVector PosTransporte = FVector(-400.0f, -600.0f, 250.0f);
 	FVector PosDestructor = FVector(-200.0f, -600.0f, 250.0f);
 
+
+
 	Ingeniero = GetWorld()->SpawnActor<AIngenieroEspecialista1>(AIngenieroEspecialista1::StaticClass());
 	Capitan = GetWorld()->SpawnActor<ACapitanNavesNodrizas>(ACapitanNavesNodrizas::StaticClass());
 
 	Capitan->OrdenarIngeniero(Ingeniero);
 	Capitan->ContruirNaveNodriza();
 
-	AConstruirNaveNodriza* Nodriza = Capitan->ObtenerNave();	
+	AConstruirNaveNodriza* Nodriza = Capitan->ObtenerNave();
+
+
+	Ingeniero2 = GetWorld()->SpawnActor<AIngenieroEspecialista2>(AIngenieroEspecialista2::StaticClass());
+
+	Capitan->OrdenarIngeniero(Ingeniero2);
+	Capitan->ConstruirNaveEscudo();
+
+	AConstruirNaveNodriza* Nodriza2 = Capitan->ObtenerNave();
+
+
+	Ingeniero3 = GetWorld()->SpawnActor<AIngenieroEspecialista3>(AIngenieroEspecialista3::StaticClass());
 	
+	Capitan->OrdenarIngeniero(Ingeniero3);
+	Capitan->ConstruirNaveBatalla();
+
+	AConstruirNaveNodriza* Nodriza3 = Capitan->ObtenerNave();
+
 	/*for (int i = 0; i < 4; i++)
 	{
 		ANaveEnemiga* Nave1 = FabricaCaza->OrdenarNaveEnemiga("Caza");

@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
+
+#include "Movimiento.h"
 #include "InterfazNodriza.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
@@ -17,6 +19,10 @@ public:
 
 	int Tiempo;
 	int AcEscudo;
+	int J;
+	FVector PosicionNave;
+
+	/*class AConstruirNaveNodriza* Motor;*/
 
 	class ACarroceriaNaveNodriza* Carroceria;
 	class AProyectilNodriza* Proyectil;
@@ -33,8 +39,8 @@ public:
 
 public:
 
-	void ImplementarNaveNodriza() override;
-	void ImplementarEscudo() override;
-	void ImplementarProyectiles() override;
-	void ImplementarArmas() override;
+	void ImplementarNaveNodriza(int z) override;
+	void ImplementarEscudo(int x) override;
+	void ImplementarProyectiles(int v) override;
+	void ImplementarArmas(int w) override;
 };

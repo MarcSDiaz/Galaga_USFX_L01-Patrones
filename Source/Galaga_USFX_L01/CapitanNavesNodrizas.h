@@ -29,6 +29,8 @@ public:
 
 	void OrdenarIngeniero(AActor* Ingeniero);
 	void ContruirNaveNodriza();
+	void ConstruirNaveEscudo();
+	void ConstruirNaveBatalla();
 	class AConstruirNaveNodriza* ObtenerNave();
 
 };

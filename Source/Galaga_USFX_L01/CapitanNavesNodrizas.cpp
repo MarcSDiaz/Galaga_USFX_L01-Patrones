@@ -32,10 +32,25 @@ void ACapitanNavesNodrizas::OrdenarIngeniero(AActor* Ingeniero)
 
 void ACapitanNavesNodrizas::ContruirNaveNodriza()
 {
-	IngenieroACargo->ContruirNave();
-	IngenieroACargo->ContruirEscudos();
-	IngenieroACargo->ContruirProyectiles();
-	IngenieroACargo->ContruirArmas();
+	IngenieroACargo->ContruirNave(1);
+	IngenieroACargo->ContruirEscudos(1);
+	IngenieroACargo->ContruirProyectiles(1);
+	IngenieroACargo->ContruirArmas(1);
+}
+
+void ACapitanNavesNodrizas::ConstruirNaveEscudo()
+{
+	IngenieroACargo->ContruirNave(2);
+	IngenieroACargo->ContruirEscudos(2);
+	
+}
+
+void ACapitanNavesNodrizas::ConstruirNaveBatalla()
+{
+	IngenieroACargo->ContruirNave(3);
+	IngenieroACargo->ContruirProyectiles(3);
+	IngenieroACargo->ContruirArmas(3);
+
 }
 
 AConstruirNaveNodriza* ACapitanNavesNodrizas::ObtenerNave()

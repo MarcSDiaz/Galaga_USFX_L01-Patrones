@@ -27,10 +27,10 @@ public:
 
 public:
 	
-	void ContruirNave() override;
-	void ContruirEscudos() override;
-	void ContruirProyectiles() override;
-	void ContruirArmas() override;
+	void ContruirNave(int a) override;
+	void ContruirEscudos(int b) override;
+	void ContruirProyectiles(int c) override;
+	void ContruirArmas(int d) override;
 	class AConstruirNaveNodriza* ObtenerNaveNodriza() override;
 
 };

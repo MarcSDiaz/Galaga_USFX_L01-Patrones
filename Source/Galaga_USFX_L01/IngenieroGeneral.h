@@ -23,10 +23,10 @@ class GALAGA_USFX_L01_API IIngenieroGeneral
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
 	//Puros metodos virtuales, todos los necesarios para crear mi nave final
-	virtual void ContruirNave() = 0;
-	virtual void ContruirEscudos() = 0;
-	virtual void ContruirProyectiles() = 0;
-	virtual void ContruirArmas() = 0;
+	virtual void ContruirNave(int a) = 0;
+	virtual void ContruirEscudos(int b) = 0;
+	virtual void ContruirProyectiles(int c) = 0;
+	virtual void ContruirArmas(int d) = 0;
 	virtual class AConstruirNaveNodriza* ObtenerNaveNodriza() = 0;
 	//Necesitamos otra interfaz que establezca todas las clases creadas, metodos virtuales, de ahi heredamos una clase final "NaveNodriza"
 };
