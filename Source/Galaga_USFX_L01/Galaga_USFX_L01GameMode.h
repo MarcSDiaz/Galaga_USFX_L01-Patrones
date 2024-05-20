@@ -24,6 +24,7 @@ public:
 
 	class ACapitanNavesNodrizas* Capitan;
 
+	class AFacade_FabricasEscuadrones* Facade;
 
 public:
 

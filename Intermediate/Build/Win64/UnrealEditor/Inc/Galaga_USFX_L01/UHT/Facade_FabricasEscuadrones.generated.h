@@ -1,0 +1,96 @@
+// Copyright Epic Games, Inc. All Rights Reserved.
+/*===========================================================================
+	Generated code exported from UnrealHeaderTool.
+	DO NOT modify this manually! Edit the corresponding .h files instead!
+===========================================================================*/
+
+// IWYU pragma: private, include "Facade_FabricasEscuadrones.h"
+#include "UObject/ObjectMacros.h"
+#include "UObject/ScriptMacros.h"
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+#ifdef GALAGA_USFX_L01_Facade_FabricasEscuadrones_generated_h
+#error "Facade_FabricasEscuadrones.generated.h already included, missing '#pragma once' in Facade_FabricasEscuadrones.h"
+#endif
+#define GALAGA_USFX_L01_Facade_FabricasEscuadrones_generated_h
+
+#define FID_Users_marco_Documents_3er_Semestre_Programacion_Avanzada_Patrones_Galaga_USFX_L01_Galaga_USFX_L01_master_Source_Galaga_USFX_L01_Facade_FabricasEscuadrones_h_13_SPARSE_DATA
+#define FID_Users_marco_Documents_3er_Semestre_Programacion_Avanzada_Patrones_Galaga_USFX_L01_Galaga_USFX_L01_master_Source_Galaga_USFX_L01_Facade_FabricasEscuadrones_h_13_RPC_WRAPPERS
+#define FID_Users_marco_Documents_3er_Semestre_Programacion_Avanzada_Patrones_Galaga_USFX_L01_Galaga_USFX_L01_master_Source_Galaga_USFX_L01_Facade_FabricasEscuadrones_h_13_RPC_WRAPPERS_NO_PURE_DECLS
+#define FID_Users_marco_Documents_3er_Semestre_Programacion_Avanzada_Patrones_Galaga_USFX_L01_Galaga_USFX_L01_master_Source_Galaga_USFX_L01_Facade_FabricasEscuadrones_h_13_ACCESSORS
+#define FID_Users_marco_Documents_3er_Semestre_Programacion_Avanzada_Patrones_Galaga_USFX_L01_Galaga_USFX_L01_master_Source_Galaga_USFX_L01_Facade_FabricasEscuadrones_h_13_INCLASS_NO_PURE_DECLS \
+private: \
+	static void StaticRegisterNativesAFacade_FabricasEscuadrones(); \
+	friend struct Z_Construct_UClass_AFacade_FabricasEscuadrones_Statics; \
+public: \
+	DECLARE_CLASS(AFacade_FabricasEscuadrones, AActor, COMPILED_IN_FLAGS(0 | CLASS_Config), CASTCLASS_None, TEXT("/Script/Galaga_USFX_L01"), NO_API) \
+	DECLARE_SERIALIZER(AFacade_FabricasEscuadrones)
+
+
+#define FID_Users_marco_Documents_3er_Semestre_Programacion_Avanzada_Patrones_Galaga_USFX_L01_Galaga_USFX_L01_master_Source_Galaga_USFX_L01_Facade_FabricasEscuadrones_h_13_INCLASS \
+private: \
+	static void StaticRegisterNativesAFacade_FabricasEscuadrones(); \
+	friend struct Z_Construct_UClass_AFacade_FabricasEscuadrones_Statics; \
+public: \
+	DECLARE_CLASS(AFacade_FabricasEscuadrones, AActor, COMPILED_IN_FLAGS(0 | CLASS_Config), CASTCLASS_None, TEXT("/Script/Galaga_USFX_L01"), NO_API) \
+	DECLARE_SERIALIZER(AFacade_FabricasEscuadrones)
+
+
+#define FID_Users_marco_Documents_3er_Semestre_Programacion_Avanzada_Patrones_Galaga_USFX_L01_Galaga_USFX_L01_master_Source_Galaga_USFX_L01_Facade_FabricasEscuadrones_h_13_STANDARD_CONSTRUCTORS \
+	/** Standard constructor, called after all reflected properties have been initialized */ \
+	NO_API AFacade_FabricasEscuadrones(const FObjectInitializer& ObjectInitializer); \
+	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(AFacade_FabricasEscuadrones) \
+	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, AFacade_FabricasEscuadrones); \
+	DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AFacade_FabricasEscuadrones); \
+private: \
+	/** Private move- and copy-constructors, should never be used */ \
+	NO_API AFacade_FabricasEscuadrones(AFacade_FabricasEscuadrones&&); \
+	NO_API AFacade_FabricasEscuadrones(const AFacade_FabricasEscuadrones&); \
+public: \
+	NO_API virtual ~AFacade_FabricasEscuadrones();
+
+
+#define FID_Users_marco_Documents_3er_Semestre_Programacion_Avanzada_Patrones_Galaga_USFX_L01_Galaga_USFX_L01_master_Source_Galaga_USFX_L01_Facade_FabricasEscuadrones_h_13_ENHANCED_CONSTRUCTORS \
+private: \
+	/** Private move- and copy-constructors, should never be used */ \
+	NO_API AFacade_FabricasEscuadrones(AFacade_FabricasEscuadrones&&); \
+	NO_API AFacade_FabricasEscuadrones(const AFacade_FabricasEscuadrones&); \
+public: \
+	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, AFacade_FabricasEscuadrones); \
+	DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AFacade_FabricasEscuadrones); \
+	DEFINE_DEFAULT_CONSTRUCTOR_CALL(AFacade_FabricasEscuadrones) \
+	NO_API virtual ~AFacade_FabricasEscuadrones();
+
+
+#define FID_Users_marco_Documents_3er_Semestre_Programacion_Avanzada_Patrones_Galaga_USFX_L01_Galaga_USFX_L01_master_Source_Galaga_USFX_L01_Facade_FabricasEscuadrones_h_10_PROLOG
+#define FID_Users_marco_Documents_3er_Semestre_Programacion_Avanzada_Patrones_Galaga_USFX_L01_Galaga_USFX_L01_master_Source_Galaga_USFX_L01_Facade_FabricasEscuadrones_h_13_GENERATED_BODY_LEGACY \
+PRAGMA_DISABLE_DEPRECATION_WARNINGS \
+public: \
+	FID_Users_marco_Documents_3er_Semestre_Programacion_Avanzada_Patrones_Galaga_USFX_L01_Galaga_USFX_L01_master_Source_Galaga_USFX_L01_Facade_FabricasEscuadrones_h_13_SPARSE_DATA \
+	FID_Users_marco_Documents_3er_Semestre_Programacion_Avanzada_Patrones_Galaga_USFX_L01_Galaga_USFX_L01_master_Source_Galaga_USFX_L01_Facade_FabricasEscuadrones_h_13_RPC_WRAPPERS \
+	FID_Users_marco_Documents_3er_Semestre_Programacion_Avanzada_Patrones_Galaga_USFX_L01_Galaga_USFX_L01_master_Source_Galaga_USFX_L01_Facade_FabricasEscuadrones_h_13_ACCESSORS \
+	FID_Users_marco_Documents_3er_Semestre_Programacion_Avanzada_Patrones_Galaga_USFX_L01_Galaga_USFX_L01_master_Source_Galaga_USFX_L01_Facade_FabricasEscuadrones_h_13_INCLASS \
+	FID_Users_marco_Documents_3er_Semestre_Programacion_Avanzada_Patrones_Galaga_USFX_L01_Galaga_USFX_L01_master_Source_Galaga_USFX_L01_Facade_FabricasEscuadrones_h_13_STANDARD_CONSTRUCTORS \
+public: \
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+
+
+#define FID_Users_marco_Documents_3er_Semestre_Programacion_Avanzada_Patrones_Galaga_USFX_L01_Galaga_USFX_L01_master_Source_Galaga_USFX_L01_Facade_FabricasEscuadrones_h_13_GENERATED_BODY \
+PRAGMA_DISABLE_DEPRECATION_WARNINGS \
+public: \
+	FID_Users_marco_Documents_3er_Semestre_Programacion_Avanzada_Patrones_Galaga_USFX_L01_Galaga_USFX_L01_master_Source_Galaga_USFX_L01_Facade_FabricasEscuadrones_h_13_SPARSE_DATA \
+	FID_Users_marco_Documents_3er_Semestre_Programacion_Avanzada_Patrones_Galaga_USFX_L01_Galaga_USFX_L01_master_Source_Galaga_USFX_L01_Facade_FabricasEscuadrones_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Users_marco_Documents_3er_Semestre_Programacion_Avanzada_Patrones_Galaga_USFX_L01_Galaga_USFX_L01_master_Source_Galaga_USFX_L01_Facade_FabricasEscuadrones_h_13_ACCESSORS \
+	FID_Users_marco_Documents_3er_Semestre_Programacion_Avanzada_Patrones_Galaga_USFX_L01_Galaga_USFX_L01_master_Source_Galaga_USFX_L01_Facade_FabricasEscuadrones_h_13_INCLASS_NO_PURE_DECLS \
+	FID_Users_marco_Documents_3er_Semestre_Programacion_Avanzada_Patrones_Galaga_USFX_L01_Galaga_USFX_L01_master_Source_Galaga_USFX_L01_Facade_FabricasEscuadrones_h_13_ENHANCED_CONSTRUCTORS \
+private: \
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+
+
+template<> GALAGA_USFX_L01_API UClass* StaticClass<class AFacade_FabricasEscuadrones>();
+
+#undef CURRENT_FILE_ID
+#define CURRENT_FILE_ID FID_Users_marco_Documents_3er_Semestre_Programacion_Avanzada_Patrones_Galaga_USFX_L01_Galaga_USFX_L01_master_Source_Galaga_USFX_L01_Facade_FabricasEscuadrones_h
+
+
+PRAGMA_ENABLE_DEPRECATION_WARNINGS

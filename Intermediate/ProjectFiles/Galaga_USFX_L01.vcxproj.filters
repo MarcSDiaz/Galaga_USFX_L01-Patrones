@@ -73,6 +73,12 @@
     <ClInclude Include="..\..\Source\Galaga_USFX_L01\FabricaNaves.h">
       <Filter>Source\Galaga_USFX_L01</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\Galaga_USFX_L01\Facade_FabricasEscuadrones.cpp">
+      <Filter>Source\Galaga_USFX_L01</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Galaga_USFX_L01\Facade_FabricasEscuadrones.h">
+      <Filter>Source\Galaga_USFX_L01</Filter>
+    </ClInclude>
     <None Include="..\..\Source\Galaga_USFX_L01\Galaga_USFX_L01.Build.cs">
       <Filter>Source\Galaga_USFX_L01</Filter>
     </None>

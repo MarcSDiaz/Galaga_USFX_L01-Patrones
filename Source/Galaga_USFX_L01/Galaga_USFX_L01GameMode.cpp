@@ -2,15 +2,14 @@
 
 #include "Galaga_USFX_L01GameMode.h"
 #include "Galaga_USFX_L01Pawn.h"
-#include "MyFabricaNaves1.h"
-#include "MyFabricaNaves2.h"
-#include "MyFabricaNaves3.h"
 
 #include "IngenieroEspecialista1.h"
 #include "IngenieroEspecialista2.h"
 #include "IngenieroEspecialista3.h"
 #include "CapitanNavesNodrizas.h"
 #include "ConstruirNaveNodriza.h"
+
+#include "Facade_FabricasEscuadrones.h"
 
 AGalaga_USFX_L01GameMode::AGalaga_USFX_L01GameMode()
 {
@@ -66,7 +65,13 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
-	AFabricaNaves* FabricaCaza = GetWorld()->SpawnActor<AMyFabricaNaves1>(AMyFabricaNaves1::StaticClass());
+	Facade = GetWorld()->SpawnActor<AFacade_FabricasEscuadrones>(AFacade_FabricasEscuadrones::StaticClass());
+	Facade->EstablecerFabricas();
+	Facade->CrearEscuadronPrimario();
+	Facade->CrearEscuadronSecundario();
+	Facade->CrearEscuadronTerciario();
+
+	/*AFabricaNaves* FabricaCaza = GetWorld()->SpawnActor<AMyFabricaNaves1>(AMyFabricaNaves1::StaticClass());
 	AFabricaNaves* FabricaTransporte = GetWorld()->SpawnActor<AMyFabricaNaves2>(AMyFabricaNaves2::StaticClass());
 	AFabricaNaves* FabricaDestructor = GetWorld()->SpawnActor<AMyFabricaNaves3>(AMyFabricaNaves3::StaticClass());
 
@@ -98,7 +103,7 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 	Capitan->OrdenarIngeniero(Ingeniero3);
 	Capitan->ConstruirNaveBatalla();
 
-	AConstruirNaveNodriza* Nodriza3 = Capitan->ObtenerNave();
+	AConstruirNaveNodriza* Nodriza3 = Capitan->ObtenerNave();*/
 
 	/*for (int i = 0; i < 4; i++)
 	{
@@ -162,11 +167,10 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 void AGalaga_USFX_L01GameMode::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	Tiempo++;
 
-	FVector PosCaza = FVector(0.0f, -600.0f, 250.0f);
+	/*FVector PosCaza = FVector(0.0f, -600.0f, 250.0f);
 	FVector PosTransporte = FVector(200.0f, -600.0f, 250.0f);
-	FVector PosDestructor = FVector(400.0f, -600.0f, 250.0f);
+	FVector PosDestructor = FVector(400.0f, -600.0f, 250.0f);*/
 
 	/*if (Tiempo % 700 == 0)
 	{
