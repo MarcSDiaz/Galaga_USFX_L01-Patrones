@@ -3,6 +3,7 @@
 
 #include "EstadoNaveLetal.h"
 #include "NaveEspecialista.h"
+#include "ProyectilNodriza.h"
 
 // Sets default values
 AEstadoNaveLetal::AEstadoNaveLetal()
@@ -34,6 +35,11 @@ void AEstadoNaveLetal::EnlazarNave(ANaveEspecialista* _NaveEsp)
 void AEstadoNaveLetal::EstadoLetal()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Turquoise, FString::Printf(TEXT("La nave Enemiga esta en estado Letal")));
+	
+	Nave->DesactivarEstadoNeutro();
+	Nave->DesactivarEstadoDefensa();
+	Nave->ActivarEstadoLetalidad();
+	
 }
 
 FString AEstadoNaveLetal::ObtenerEstado()

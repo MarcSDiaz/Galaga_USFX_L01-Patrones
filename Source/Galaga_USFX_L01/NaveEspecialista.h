@@ -25,6 +25,8 @@ public:
 
 public:
 
+	UStaticMeshComponent* MallaEspecialista;
+
 	void GenerearDiferentesEstados(FString _State);
 	void DarEstado(class IIEstados* State);
 
@@ -38,5 +40,26 @@ public:
 	void EstadoNeutral();
 	void EstadoLetal();
 
+	void ActivarEstadoLetalidad();
+	void DesactivarEstadoLetalidad();
+	void ActivarEstadoDefensa();
+	void DesactivarEstadoDefensa();
+	void ActivarEstadoNeutro();
+	void DesactivarEstadoNeutro();
+
+	class AProyectilNodriza* Proyectil;
+	class AEscudoNodriza* EscudoNave;
+
+	bool Disparo;
+	bool Defensa;
+	bool Neutro;
+
+	float TiempoDisparo;
+	float TiempoEscudo;
+	float Velocidad;
+
+	FVector PosInicial;
+
+	void Mover(float DeltaTime);
 	
 };

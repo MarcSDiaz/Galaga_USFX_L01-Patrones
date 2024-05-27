@@ -81,7 +81,7 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 
 	/*Facade2 = GetWorld()->SpawnActor<AFacadeFormaciones>(AFacadeFormaciones::StaticClass());*/
 
-	Radar = GetWorld()->SpawnActor<ARadar>(ARadar::StaticClass());
+	/*Radar = GetWorld()->SpawnActor<ARadar>(ARadar::StaticClass());
 
 	for (int i = 0; i < 2; i++)
 	{
@@ -109,9 +109,10 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 		PosNavesSub2.Y = PosNavesSub2.Y + 200.0f;
 	}
 
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Purple, FString::Printf(TEXT("La energia de las naves esta al : %.2f"), TotalEnergy));
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Purple, FString::Printf(TEXT("La energia de las naves esta al : %.2f"), TotalEnergy));*/
 
-	/*NaveEspecialista = GetWorld()->SpawnActor<ANaveEspecialista>(ANaveEspecialista::StaticClass());*/
+	NaveEspecialista = GetWorld()->SpawnActor<ANaveEspecialista>(ANaveEspecialista::StaticClass());
+	NaveEspecialista->SetActorLocation(PosNavesSub1);
 
 }
 
@@ -119,7 +120,7 @@ void AGalaga_USFX_L01GameMode::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime); 
 
-	/*State += DeltaTime;
+	State += DeltaTime;
 
 	if (State > 7.0f && Estado == 0)
 	{
@@ -138,38 +139,44 @@ void AGalaga_USFX_L01GameMode::Tick(float DeltaTime)
 		NaveEspecialista->GenerearDiferentesEstados("Defensivo");
 		NaveEspecialista->EstadoDefensivo();
 		Estado++;
-	}*/
+	}
+	else if (State > 35.0f && Estado == 3)
+	{
+		NaveEspecialista->GenerearDiferentesEstados("Neutro");
+		NaveEspecialista->EstadoNeutral();
+		Estado++;
+	}
 
-	TotalEnergy -= DeltaTime;
+	//TotalEnergy -= DeltaTime;
 
-	if (TotalEnergy < 25.0f && V == 0)
-	{
-		Radar->SetEnergia("25");
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Purple, FString::Printf(TEXT("La energia esta disminuyendo: %.2f"), TotalEnergy));
-		for (ANaveSubscriptor_1* Subs1 : NavesSub1)
-		{
-			Subs1->DestruirSubscripcion();
-		}
-		NaveSubscriptor1->DestruirSubscripcion();
-		V++;
-	}
-	else if (TotalEnergy < 15.0f && V == 1)
-	{
-		Radar->SetEnergia("15");
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Purple, FString::Printf(TEXT("La energia esta disminuyendo: %.2f"), TotalEnergy));
-		V++;
-	}
-	else if (TotalEnergy < 7.0f && V == 2)
-	{
-		Radar->SetEnergia("7");
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Purple, FString::Printf(TEXT("La energia esta disminuyendo: %.2f"), TotalEnergy));
-		V++;
-	}
-	else if (TotalEnergy <= 2.0f)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Purple, FString::Printf(TEXT("La energia esta disminuyendo: %.2f"), TotalEnergy));
-		TotalEnergy = 30.0f;
-	}
+	//if (TotalEnergy < 25.0f && V == 0)
+	//{
+	//	Radar->SetEnergia("25");
+	//	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Purple, FString::Printf(TEXT("La energia esta disminuyendo: %.2f"), TotalEnergy));
+	//	for (ANaveSubscriptor_1* Subs1 : NavesSub1)
+	//	{
+	//		Subs1->DestruirSubscripcion();
+	//	}
+	//	//NaveSubscriptor1->DestruirSubscripcion();
+	//	V++;
+	//}
+	//else if (TotalEnergy < 15.0f && V == 1)
+	//{
+	//	Radar->SetEnergia("15");
+	//	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Purple, FString::Printf(TEXT("La energia esta disminuyendo: %.2f"), TotalEnergy));
+	//	V++;
+	//}
+	//else if (TotalEnergy < 7.0f && V == 2)
+	//{
+	//	Radar->SetEnergia("7");
+	//	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Purple, FString::Printf(TEXT("La energia esta disminuyendo: %.2f"), TotalEnergy));
+	//	V++;
+	//}
+	//else if (TotalEnergy <= 2.0f)
+	//{
+	//	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Purple, FString::Printf(TEXT("La energia esta disminuyendo: %.2f"), TotalEnergy));
+	//	TotalEnergy = 30.0f;
+	//}
 
 	/*if (Tiempo == 175)
 	{

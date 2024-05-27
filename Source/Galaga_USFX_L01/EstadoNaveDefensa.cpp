@@ -34,6 +34,10 @@ void AEstadoNaveDefensa::EnlazarNave(ANaveEspecialista* _NaveEsp)
 void AEstadoNaveDefensa::EstadoDefensa()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Magenta, FString::Printf(TEXT("La nave Enemiga esta en estado Defensivo")));
+
+	Nave->DesactivarEstadoLetalidad();
+	Nave->DesactivarEstadoNeutro();
+	Nave->ActivarEstadoDefensa();
 }
 
 FString AEstadoNaveDefensa::ObtenerEstado()

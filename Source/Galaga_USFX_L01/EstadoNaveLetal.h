@@ -38,4 +38,5 @@ private:
 protected:
 
 	class ANaveEspecialista* Nave;
+
 };
