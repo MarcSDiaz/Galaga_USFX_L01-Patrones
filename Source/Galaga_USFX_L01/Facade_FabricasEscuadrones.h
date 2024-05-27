@@ -42,5 +42,6 @@ public:
 	void CrearEscuadronPrimario();
 	void CrearEscuadronSecundario();
 	void CrearEscuadronTerciario();
+	void DestruirFormacion();
 
 };

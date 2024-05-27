@@ -21,10 +21,24 @@ public:
 	FORCEINLINE int GetCantidadBombas() const { return cantidadBombas; }
 	FORCEINLINE void SetCantidadBombas(int _cantidadBombas) { cantidadBombas = _cantidadBombas; }
 protected:
+	
 	virtual void Mover(float DeltaTime);
 	virtual void Disparar();
+	virtual void BeginPlay() override;
 
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	float VCaida;//Declaramos la velocidad de caida
+	float VHorizontal;//Declaramos la velocidad horizontal
+	FVector PosicionInicial;//Declaramos la posicion inicial de la nave
+	FVector LimiteDerecho;
+	FVector LimiteIzquierdo;
+	FVector LimiteMaximo;
+
+	FVector Prueba;
+
+	class UMovimiento* Movimiento;
+
 };

@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-#include "Movimiento.h"
+
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "NaveEnemiga.generated.h"
@@ -68,8 +68,6 @@ public:
 	// Sets default values for this actor's properties
 	ANaveEnemiga();
 
-	UMovimiento* Rombo;
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -79,7 +77,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 protected:
-	//virtual void Mover() = 0;
+
 	void Mover(float DeltaTime) PURE_VIRTUAL(ANaveEnemiga::Mover, );
 	void Disparar() PURE_VIRTUAL(ANaveEnemiga::Disparar, );
 	void RecargarMuniciones() PURE_VIRTUAL(ANaveEnemiga::RecargarMuniciones, );

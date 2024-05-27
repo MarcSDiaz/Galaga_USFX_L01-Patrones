@@ -12,10 +12,9 @@ AFacade_FabricasEscuadrones::AFacade_FabricasEscuadrones()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	PosEscuadronPrimario = FVector(0.0f, -500.0f, 250.0f);
-	PosEscuadronSecundario = FVector(300.0f, -500.0f, 250.0f);
-	PosEscuadronTerciario = FVector(600.0f, -500.0f, 250.0f);
-
+	/*PosEscuadronPrimario = FVector(0.0f, -500.0f, 250.0f);*/
+	/*PosEscuadronSecundario = FVector(300.0f, -500.0f, 250.0f);*/
+	/*PosEscuadronTerciario = FVector(600.0f, -500.0f, 250.0f);*/
 }
 
 // Called when the game starts or when spawned
@@ -46,6 +45,8 @@ void AFacade_FabricasEscuadrones::EstablecerFabricas()
 
 void AFacade_FabricasEscuadrones::CrearEscuadronPrimario()
 {
+	PosEscuadronPrimario = FVector(0.0f, -500.0f, 250.0f);
+
 	for (int i = 0; i < 10; i++)
 	{
 		ANaveEnemiga* NaveCaza = FabricaCaza->OrdenarNaveEnemiga("Caza");
@@ -62,6 +63,8 @@ void AFacade_FabricasEscuadrones::CrearEscuadronPrimario()
 
 void AFacade_FabricasEscuadrones::CrearEscuadronSecundario()
 {
+	PosEscuadronSecundario = FVector(300.0f, -500.0f, 250.0f);
+
 	for (int i = 0; i < 10; i++)
 	{
 		ANaveEnemiga* NaveTransportes = FabricaTransporte->OrdenarNaveEnemiga("Transporte");
@@ -78,6 +81,8 @@ void AFacade_FabricasEscuadrones::CrearEscuadronSecundario()
 
 void AFacade_FabricasEscuadrones::CrearEscuadronTerciario()
 {
+	PosEscuadronTerciario = FVector(600.0f, -500.0f, 250.0f);
+
 	for (int i = 0; i < 10; i++)
 	{
 		ANaveEnemiga* NaveDestructores = FabricaDestructores->OrdenarNaveEnemiga("Destructor");
@@ -90,6 +95,19 @@ void AFacade_FabricasEscuadrones::CrearEscuadronTerciario()
 		}
 		TANavesEnemigas.Push(NaveDestructores);
 	}
+}
+
+void AFacade_FabricasEscuadrones::DestruirFormacion()
+{
+	for (ANaveEnemiga* Nave : TANavesEnemigas)
+	{
+		if (Nave)
+		{
+			Nave->Destroy();
+		}
+	}
+
+	TANavesEnemigas.Empty();
 }
 
 

@@ -7,11 +7,10 @@
 ANaveEnemiga::ANaveEnemiga()
 {
 	PrimaryActorTick.bCanEverTick = true;
+
 	mallaNaveEnemiga = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ShipMesh"));
 	mallaNaveEnemiga->SetupAttachment(RootComponent);
 	RootComponent = mallaNaveEnemiga;
-
-	/*Rombo = CreateDefaultSubobject<UMovimiento>(TEXT("Movimiento"));*/
 
 }
 

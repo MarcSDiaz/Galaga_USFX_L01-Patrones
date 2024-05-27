@@ -15,9 +15,6 @@ class GALAGA_USFX_L01_API UMovimiento : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UMovimiento();
-	float VCaida;//Declaramos la velocidad de caida
-	float VHorizontal;//Declaramos la velocidad horizontal
-	FVector PosicionInicial;//Declaramos la posicion inicial de la nave
 
 protected:
 	// Called when the game starts

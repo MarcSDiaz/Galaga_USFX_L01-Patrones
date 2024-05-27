@@ -15,6 +15,8 @@ AProyectilNodriza::AProyectilNodriza()
 	PrimaryActorTick.bCanEverTick = true;
 
 	Velocidad = 500.0f;
+
+	Tiempo = 1.0f;
 }
 
 // Called when the game starts or when spawned
@@ -29,6 +31,11 @@ void AProyectilNodriza::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	Mover(DeltaTime);
+	Tiempo += DeltaTime;
+	if (Tiempo > 3.0f)
+	{
+		Destroy();
+	}
 
 }
 
