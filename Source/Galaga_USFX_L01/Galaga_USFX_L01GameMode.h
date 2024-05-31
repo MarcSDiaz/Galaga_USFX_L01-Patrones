@@ -51,6 +51,8 @@ protected:
 	class ANaveSubscriptor_1* NaveSubscriptor1;
 	class ANaveSubscriptor_2* NaveSubscriptor2;
 
+	class AFacadeFormaciones* Facade;
+
 	class ANaveEspecialista* NaveEspecialista;
 
 
@@ -64,8 +66,12 @@ public:
 
 	FVector PosNavesSub1;
 	FVector PosNavesSub2;
+	FVector PosNaveEsp;
 
 	float State;
 	int Estado;
+	int _Facade;
+
+	float TiempoDeJuego;
 
 };

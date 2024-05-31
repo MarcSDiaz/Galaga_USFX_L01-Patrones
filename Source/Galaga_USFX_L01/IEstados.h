@@ -25,9 +25,10 @@ public:
 
 	virtual void EnlazarNave(class ANaveEspecialista* _NaveEsp) = 0;
 
-	virtual void EstadoDefensa() = 0;
-	virtual void EstadoNeutral() = 0;
-	virtual void EstadoLetal() = 0;
+	virtual void Defensivo() = 0;
+	virtual void Neutral() = 0;
+	virtual void Letal() = 0;
+	virtual void Giratorio() = 0;
 
 	virtual FString ObtenerEstado() = 0;
 };

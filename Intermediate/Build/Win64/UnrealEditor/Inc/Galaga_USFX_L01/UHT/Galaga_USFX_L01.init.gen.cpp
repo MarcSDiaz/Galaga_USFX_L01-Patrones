@@ -17,13 +17,13 @@ void EmptyLinkFunctionForGeneratedCodeGalaga_USFX_L01_init() {}
 				nullptr,
 				0,
 				PKG_CompiledIn | 0x00000000,
-				0x030F9765,
-				0x9B9B41A3,
+				0x061F6B91,
+				0x908D45E2,
 				METADATA_PARAMS(nullptr, 0)
 			};
 			UECodeGen_Private::ConstructUPackage(Z_Registration_Info_UPackage__Script_Galaga_USFX_L01.OuterSingleton, PackageParams);
 		}
 		return Z_Registration_Info_UPackage__Script_Galaga_USFX_L01.OuterSingleton;
 	}
-	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_Galaga_USFX_L01(Z_Construct_UPackage__Script_Galaga_USFX_L01, TEXT("/Script/Galaga_USFX_L01"), Z_Registration_Info_UPackage__Script_Galaga_USFX_L01, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x030F9765, 0x9B9B41A3));
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_Galaga_USFX_L01(Z_Construct_UPackage__Script_Galaga_USFX_L01, TEXT("/Script/Galaga_USFX_L01"), Z_Registration_Info_UPackage__Script_Galaga_USFX_L01, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x061F6B91, 0x908D45E2));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

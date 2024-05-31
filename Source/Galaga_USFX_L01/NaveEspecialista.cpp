@@ -8,6 +8,7 @@
 #include "EstadoNaveDefensa.h"
 #include "EstadoNaveLetal.h"
 #include "EstadoNaveNeutro.h"
+#include "EstadoNaveGiratorio.h"
 
 // Sets default values
 ANaveEspecialista::ANaveEspecialista()
@@ -19,11 +20,8 @@ ANaveEspecialista::ANaveEspecialista()
 	MallaEspecialista = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ShipMesh"));
 	MallaEspecialista -> SetStaticMesh(ShipMesh.Object);
 
-	Disparo = false;
-	Defensa = false;
-	Neutro = true;
-
 	TiempoDisparo = 0.0f;
+	TiempoEscudo = 0.0f;
 
 	Velocidad = 100.0f;
 }
@@ -42,50 +40,12 @@ void ANaveEspecialista::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	Mover(DeltaTime);
+	
+	TiempoDisparo += DeltaTime;
+	TiempoEscudo += DeltaTime;
 
-	if (Disparo)
-	{
-		TiempoDisparo += DeltaTime;
-
-		if (TiempoDisparo > 2.0f)
-		{
-			FVector PosNave = GetActorLocation();
-			FRotator RotNave = GetActorRotation();
-
-			FVector DistanciaP = FVector(-100.0f, 0.0f, 0.0f);
-
-			FVector PosP = PosNave + GetActorForwardVector() * DistanciaP;
-
-			Proyectil = GetWorld()->SpawnActor<AProyectilNodriza>(PosP, RotNave);
-
-			TiempoDisparo = 0.0f;
-		}
-	}
-
-	if (Defensa)
-	{
-		TiempoEscudo += DeltaTime;
-
-		if (TiempoEscudo > 5.0f)
-		{
-			FVector PosNaveEscudo = GetActorLocation();
-			FRotator RotNaveEscudo = GetActorRotation();
-
-			FVector DistanciaPEscudo = FVector(-100.0f, 0.0f, 0.0f);
-
-			FVector PosPEscudo = PosNaveEscudo + GetActorForwardVector() * DistanciaPEscudo;
-
-			if (EscudoNave)
-			{
-				EscudoNave->Destroy();
-			}
-
-			EscudoNave = GetWorld()->SpawnActor<AEscudoNodriza>(PosPEscudo, RotNaveEscudo);
-
-			TiempoEscudo = 0.0f;
-		}
-	}
-
+	Letalidad(Disparo);
+	Defender(Defensa);
 }
 
 void ANaveEspecialista::GenerearDiferentesEstados(FString _State)
@@ -108,6 +68,12 @@ void ANaveEspecialista::GenerearDiferentesEstados(FString _State)
 		EstadoNaveNeutral->EnlazarNave(this);
 		DarEstado(EstadoNaveNeutral);
 	}
+	if (_State.Equals("Giratorio"))
+	{
+		EstadoNaveGiratorio = GetWorld()->SpawnActor<AEstadoNaveGiratorio>(AEstadoNaveGiratorio::StaticClass());
+		EstadoNaveGiratorio->EnlazarNave(this);
+		DarEstado(EstadoNaveGiratorio);
+	}
 }
 
 void ANaveEspecialista::DarEstado(IIEstados* State)
@@ -117,69 +83,116 @@ void ANaveEspecialista::DarEstado(IIEstados* State)
 
 void ANaveEspecialista::EstadoDefensivo()
 {
-	Estado->EstadoDefensa();
+	Estado->Defensivo();
 }
 
 void ANaveEspecialista::EstadoNeutral()
 {
-	Estado->EstadoNeutral();
+	Estado->Neutral();
 }
 
 void ANaveEspecialista::EstadoLetal()
 {
-	Estado->EstadoLetal();
+	Estado->Letal();
 }
 
-void ANaveEspecialista::ActivarEstadoLetalidad()
+void ANaveEspecialista::EstadoGiratorio()
 {
-	Disparo = true;
+	Estado->Giratorio();
 }
 
-void ANaveEspecialista::DesactivarEstadoLetalidad()
+void ANaveEspecialista::Defender(bool _Defensa)
 {
-	Disparo = false;
+	Defensa = _Defensa;
+
+	if (_Defensa)
+	{
+		if (TiempoEscudo > 5.0f)
+		{
+			FVector PosNaveEscudo = GetActorLocation();
+			FRotator RotNaveEscudo = GetActorRotation();
+
+			FVector DistanciaPEscudo = FVector(-100.0f, 0.0f, 0.0f);
+
+			FVector PosPEscudo = PosNaveEscudo + GetActorForwardVector() * DistanciaPEscudo;
+
+			if (EscudoNave)
+			{
+				EscudoNave->Destroy();
+			}
+
+			EscudoNave = GetWorld()->SpawnActor<AEscudoNodriza>(PosPEscudo, RotNaveEscudo);
+
+			TiempoEscudo = 0.0f;
+		}
+	}
 }
 
-void ANaveEspecialista::ActivarEstadoDefensa()
+void ANaveEspecialista::Letalidad(bool Letal)
 {
-	Defensa = true;
+	Disparo = Letal;
+
+	if (Letal)
+	{
+		if (TiempoDisparo > 2.0f)
+		{
+			FVector PosNave = GetActorLocation();
+			FRotator RotNave = GetActorRotation();
+
+			FVector DistanciaP = FVector(-100.0f, 0.0f, 0.0f);
+
+			FVector PosP = PosNave + GetActorForwardVector() * DistanciaP;
+
+			Proyectil = GetWorld()->SpawnActor<AProyectilNodriza>(PosP, RotNave);
+
+			TiempoDisparo = 0.0f;
+		}
+	}
 }
 
-void ANaveEspecialista::DesactivarEstadoDefensa()
+void ANaveEspecialista::Neutro(bool Neutralidad)
 {
-	Defensa = false;
+	if (Neutralidad)
+	{
+		Velocidad = 0.0f;
+	}
 }
 
-void ANaveEspecialista::ActivarEstadoNeutro()
+void ANaveEspecialista::Giratorio(bool Girar)
 {
-	Neutro = true;
-}
+	Giro = Girar;
+	if (Girar)
+	{
+		Rotacion = 50.0f;
 
-void ANaveEspecialista::DesactivarEstadoNeutro()
-{
-	Neutro = false;
+	}
+	else if (!Girar)
+	{
+		Rotacion = 0.0f;
+	}
 }
 
 void ANaveEspecialista::Mover(float DeltaTime)
 {
-	if (!Neutro)
+	FVector PosActual = GetActorLocation();
+	FRotator PosRotator = GetActorRotation();
+
+	FVector NuevaPos = PosActual + FVector(0.0f, Velocidad * DeltaTime, 0.0f);
+	FRotator NuevaRot = PosRotator + FRotator(0.0f, Rotacion * DeltaTime, 0.0f);
+
+	FVector LimiteDerecho = PosInicial + FVector(0.0f, 400.0f, 0.0f);
+	FVector LimiteIzquierdo = PosInicial - FVector(0.0f, 400.0f, 0.0f);
+
+	if (PosActual.Y > LimiteDerecho.Y && Velocidad > 0)
 	{
-		FVector PosActual = GetActorLocation();
-		FVector NuevaPos = PosActual + FVector(0.0f, Velocidad * DeltaTime, 0.0f);
-
-		FVector LimiteDerecho = PosInicial + FVector(0.0f, 400.0f, 0.0f);
-		FVector LimiteIzquierdo = PosInicial - FVector(0.0f, 400.0f, 0.0f);
-
-		if (PosActual.Y > LimiteDerecho.Y && Velocidad > 0)
-		{
-			Velocidad *= -1;
-		}
-		else if (PosActual.Y < LimiteIzquierdo.Y && Velocidad < 0)
-		{
-			Velocidad *= -1;
-		}
-
-		SetActorLocation(NuevaPos);
+		Velocidad *= -1;
 	}
+	else if (PosActual.Y < LimiteIzquierdo.Y && Velocidad < 0)
+	{
+			Velocidad *= -1;
+	}
+
+	SetActorLocation(NuevaPos);
+	SetActorRotation(NuevaRot);
 }
 

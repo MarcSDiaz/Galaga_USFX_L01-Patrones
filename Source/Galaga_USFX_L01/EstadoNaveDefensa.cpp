@@ -31,17 +31,18 @@ void AEstadoNaveDefensa::EnlazarNave(ANaveEspecialista* _NaveEsp)
 	Nave = Cast<ANaveEspecialista>(_NaveEsp);
 }
 
-void AEstadoNaveDefensa::EstadoDefensa()
+void AEstadoNaveDefensa::Defensivo()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Magenta, FString::Printf(TEXT("La nave Enemiga esta en estado Defensivo")));
-
-	Nave->DesactivarEstadoLetalidad();
-	Nave->DesactivarEstadoNeutro();
-	Nave->ActivarEstadoDefensa();
+	
+	Nave->Defender(true);
+	Nave->Letalidad(false);
+	Nave->Neutro(false);
+	Nave->Giratorio(false);
 }
 
 FString AEstadoNaveDefensa::ObtenerEstado()
 {
-	return "Sin actividad";
+	return "Estado Defensivo";
 }
 

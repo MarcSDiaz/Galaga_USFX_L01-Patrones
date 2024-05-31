@@ -33,30 +33,32 @@ public:
 	class IIEstados* EstadoNaveDefensa;
 	class IIEstados* EstadoNaveLetal;
 	class IIEstados* EstadoNaveNeutral;
+	class IIEstados* EstadoNaveGiratorio;
 
 	class IIEstados* Estado;
 
 	void EstadoDefensivo();
 	void EstadoNeutral();
 	void EstadoLetal();
+	void EstadoGiratorio();
 
-	void ActivarEstadoLetalidad();
-	void DesactivarEstadoLetalidad();
-	void ActivarEstadoDefensa();
-	void DesactivarEstadoDefensa();
-	void ActivarEstadoNeutro();
-	void DesactivarEstadoNeutro();
+	void Defender(bool _Defensa);
+	void Letalidad(bool Letal);
+	void Neutro(bool Neutralidad);
+	void Giratorio(bool Girar);
 
 	class AProyectilNodriza* Proyectil;
 	class AEscudoNodriza* EscudoNave;
 
 	bool Disparo;
 	bool Defensa;
-	bool Neutro;
+	bool Neutr;
+	bool Giro;
 
 	float TiempoDisparo;
 	float TiempoEscudo;
 	float Velocidad;
+	float Rotacion;
 
 	FVector PosInicial;
 

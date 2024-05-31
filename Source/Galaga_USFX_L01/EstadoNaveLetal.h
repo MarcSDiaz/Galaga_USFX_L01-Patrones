@@ -27,16 +27,21 @@ public:
 public:
 
 	void EnlazarNave(class ANaveEspecialista* _NaveEsp) override;
-	void EstadoLetal() override;
+	void Letal() override;
 	FString ObtenerEstado() override;
+
+	/*float TiempoDisparo;*/
 
 private:
 
-	void EstadoDefensa() override {};
-	void EstadoNeutral() override {};
+	void Defensivo() override {};
+	void Neutral() override {};
+	void Giratorio() override {};
 
 protected:
 
 	class ANaveEspecialista* Nave;
+
+	class AProyectilNodriza* Proyectil;
 
 };

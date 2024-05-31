@@ -85,6 +85,12 @@
     <ClInclude Include="..\..\Source\Galaga_USFX_L01\EstadoNaveDefensa.h">
       <Filter>Source\Galaga_USFX_L01</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\Galaga_USFX_L01\EstadoNaveGiratorio.cpp">
+      <Filter>Source\Galaga_USFX_L01</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Galaga_USFX_L01\EstadoNaveGiratorio.h">
+      <Filter>Source\Galaga_USFX_L01</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\Galaga_USFX_L01\EstadoNaveLetal.cpp">
       <Filter>Source\Galaga_USFX_L01</Filter>
     </ClCompile>

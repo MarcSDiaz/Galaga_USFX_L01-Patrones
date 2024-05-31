@@ -7,6 +7,8 @@
 #include "NaveSubscriptor_1.h"
 #include "NaveSubscriptor_2.h"
 
+#include "FacadeFormaciones.h"
+
 #include "NaveEspecialista.h"
 
 //#include "IngenieroEspecialista1.h"
@@ -25,8 +27,11 @@ AGalaga_USFX_L01GameMode::AGalaga_USFX_L01GameMode()
 
 	DefaultPawnClass = AGalaga_USFX_L01Pawn::StaticClass();
 
+	TiempoDeJuego = 0.0f;
+
 	PosNavesSub1 = FVector(-700.0f, 200.0f, 200.0f);
 	PosNavesSub2 = FVector(-700.0f, 800.0f, 200.0f);
+	PosNaveEsp = FVector(1200.0f, -800.0f, 250.0f);
 
 	TotalEnergy = 30.0f;
 
@@ -34,6 +39,7 @@ AGalaga_USFX_L01GameMode::AGalaga_USFX_L01GameMode()
 
 	State = 1.0f;
 	Estado = 0;
+	_Facade = 0;
 }
 //void AGalaga_USFX_L01GameMode::BeginPlay()
 //{
@@ -79,7 +85,11 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
-	/*Facade2 = GetWorld()->SpawnActor<AFacadeFormaciones>(AFacadeFormaciones::StaticClass());*/
+	//PATRON FACADE
+
+	//Facade = GetWorld()->SpawnActor<AFacadeFormaciones>(AFacadeFormaciones::StaticClass());
+
+	//PATRON OBSERVER
 
 	/*Radar = GetWorld()->SpawnActor<ARadar>(ARadar::StaticClass());
 
@@ -111,8 +121,10 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Purple, FString::Printf(TEXT("La energia de las naves esta al : %.2f"), TotalEnergy));*/
 
+	//PATRON STATE
+
 	NaveEspecialista = GetWorld()->SpawnActor<ANaveEspecialista>(ANaveEspecialista::StaticClass());
-	NaveEspecialista->SetActorLocation(PosNavesSub1);
+	NaveEspecialista->SetActorLocation(PosNaveEsp);
 
 }
 
@@ -120,101 +132,104 @@ void AGalaga_USFX_L01GameMode::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime); 
 
+	//TiempoDeJuego += DeltaTime;
+
 	State += DeltaTime;
 
 	if (State > 7.0f && Estado == 0)
-	{
-		NaveEspecialista->GenerearDiferentesEstados("Neutro");
-		NaveEspecialista->EstadoNeutral();
-		Estado++;
-	}
-	else if (State > 14.0f && Estado == 1)
 	{
 		NaveEspecialista->GenerearDiferentesEstados("Letal");
 		NaveEspecialista->EstadoLetal();
 		Estado++;
 	}
-	else if (State > 21.0f && Estado == 2)
+	else if (State > 14.0f && Estado == 1)
 	{
 		NaveEspecialista->GenerearDiferentesEstados("Defensivo");
 		NaveEspecialista->EstadoDefensivo();
 		Estado++;
 	}
-	else if (State > 35.0f && Estado == 3)
+	else if (State > 21.0f && Estado == 2)
+	{
+		NaveEspecialista->GenerearDiferentesEstados("Giratorio");
+		NaveEspecialista->EstadoGiratorio();
+		Estado++;
+	}
+	else if (State > 25.0f && Estado == 3)
 	{
 		NaveEspecialista->GenerearDiferentesEstados("Neutro");
 		NaveEspecialista->EstadoNeutral();
 		Estado++;
 	}
 
-	//TotalEnergy -= DeltaTime;
+	//PATRON OBSERVER
 
-	//if (TotalEnergy < 25.0f && V == 0)
-	//{
-	//	Radar->SetEnergia("25");
-	//	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Purple, FString::Printf(TEXT("La energia esta disminuyendo: %.2f"), TotalEnergy));
-	//	for (ANaveSubscriptor_1* Subs1 : NavesSub1)
-	//	{
-	//		Subs1->DestruirSubscripcion();
-	//	}
-	//	//NaveSubscriptor1->DestruirSubscripcion();
-	//	V++;
-	//}
-	//else if (TotalEnergy < 15.0f && V == 1)
-	//{
-	//	Radar->SetEnergia("15");
-	//	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Purple, FString::Printf(TEXT("La energia esta disminuyendo: %.2f"), TotalEnergy));
-	//	V++;
-	//}
-	//else if (TotalEnergy < 7.0f && V == 2)
-	//{
-	//	Radar->SetEnergia("7");
-	//	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Purple, FString::Printf(TEXT("La energia esta disminuyendo: %.2f"), TotalEnergy));
-	//	V++;
-	//}
-	//else if (TotalEnergy <= 2.0f)
-	//{
-	//	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Purple, FString::Printf(TEXT("La energia esta disminuyendo: %.2f"), TotalEnergy));
-	//	TotalEnergy = 30.0f;
-	//}
+	/*TotalEnergy -= DeltaTime;
 
-	/*if (Tiempo == 175)
+	if (TotalEnergy < 25.0f && V == 0)
 	{
-		Facade2->FormacionFacil("Formacion");
+		Radar->SetEnergia("25");
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Purple, FString::Printf(TEXT("La energia esta disminuyendo: %.2f"), TotalEnergy));
+		for (ANaveSubscriptor_1* Subs1 : NavesSub1)
+		{
+			Subs1->DestruirSubscripcion();
+		}
+		V++;
 	}
-	else if (Tiempo == 350 || Tiempo == 420)
+	else if (TotalEnergy < 15.0f && V == 1)
 	{
-		if (Tiempo == 350)
-		{
-			Facade2->FormacionFacil("Destruir");
-		}
-		else if (Tiempo == 420)
-		{
-			Facade2->FormacionIntermedia("Formacion");
-		}
+		Radar->SetEnergia("15");
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Purple, FString::Printf(TEXT("La energia esta disminuyendo: %.2f"), TotalEnergy));
+		V++;
 	}
-	else if (Tiempo == 595 || Tiempo == 665)
+	else if (TotalEnergy < 7.0f && V == 2)
 	{
-		if (Tiempo == 595)
-		{
-			Facade2->FormacionIntermedia("Destruir");
-		}
-		else if (Tiempo == 665)
-		{
-			Facade2->FormacionDificil("Formacion");
-		}
+		Radar->SetEnergia("7");
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Purple, FString::Printf(TEXT("La energia esta disminuyendo: %.2f"), TotalEnergy));
+		V++;
 	}
-	else if (Tiempo == 840 || Tiempo == 910)
+	else if (TotalEnergy <= 2.0f)
 	{
-		if (Tiempo == 840)
-		{
-			Facade2->FormacionDificil("Destruir");
-		}
-		else if (Tiempo == 910)
-		{
-
-		}
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Purple, FString::Printf(TEXT("La energia esta disminuyendo: %.2f"), TotalEnergy));
+		TotalEnergy = 30.0f;
 	}*/
 
+	//PATRON FACADE
+
+	/*if (TiempoDeJuego > 5.0f && _Facade == 0)
+	{
+		Facade->FormacionFacil("Formacion");
+		_Facade++;
+	}
+	else if ((TiempoDeJuego > 10.0f || TiempoDeJuego > 12.0f) && (_Facade == 1 || _Facade == 2))
+	{
+		if (TiempoDeJuego > 10.0f && _Facade == 1)
+		{
+			Facade->FormacionFacil("Destruir");
+			_Facade++;
+		}
+		else if (TiempoDeJuego > 12.0f && _Facade == 2)
+		{
+			Facade->FormacionIntermedia("Formacion");
+			_Facade++;
+		}
+	}
+	else if ((TiempoDeJuego > 17.0f || TiempoDeJuego > 19.0f) && (_Facade == 3 || _Facade == 4))
+	{
+		if (TiempoDeJuego > 17.0f && _Facade == 3)
+		{
+			Facade->FormacionIntermedia("Destruir");
+			_Facade++;
+		}
+		else if (TiempoDeJuego > 19.0f && _Facade == 4)
+		{
+			Facade->FormacionDificil("Formacion");
+			_Facade++;
+		}
+	}
+	else if (TiempoDeJuego > 24.0f && _Facade == 5)
+	{
+		Facade->FormacionDificil("Destruir");
+		_Facade++;
+	}*/
 
 }
