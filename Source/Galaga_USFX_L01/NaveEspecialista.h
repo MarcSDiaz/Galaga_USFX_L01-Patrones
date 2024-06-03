@@ -25,7 +25,7 @@ public:
 
 public:
 
-	UStaticMeshComponent* MallaEspecialista;
+	class UStaticMeshComponent* MallaEspecialista;
 
 	void GenerearDiferentesEstados(FString _State);
 	void DarEstado(class IIEstados* State);
@@ -47,6 +47,8 @@ public:
 	void Neutro(bool Neutralidad);
 	void Giratorio(bool Girar);
 
+	void Estado_Actual();
+
 	class AProyectilNodriza* Proyectil;
 	class AEscudoNodriza* EscudoNave;
 
@@ -62,6 +64,14 @@ public:
 
 	FVector PosInicial;
 
+	FString EstadoActual;
+
 	void Mover(float DeltaTime);
+
+	int Mensaje;
 	
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+
+
 };

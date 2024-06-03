@@ -10,6 +10,11 @@
 #include "EstadoNaveNeutro.h"
 #include "EstadoNaveGiratorio.h"
 
+#include "Galaga_USFX_L01Projectile.h"
+#include "Galaga_USFX_L01Pawn.h"
+#include "Components/PrimitiveComponent.h"
+#include "Kismet/GameplayStatics.h"
+
 // Sets default values
 ANaveEspecialista::ANaveEspecialista()
 {
@@ -18,12 +23,19 @@ ANaveEspecialista::ANaveEspecialista()
 
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> ShipMesh(TEXT("/Script/Engine.StaticMesh'/Game/StarterContent/Shapes/Shape_Cube.Shape_Cube'"));
 	MallaEspecialista = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ShipMesh"));
+	MallaEspecialista->BodyInstance.SetCollisionProfileName("Nave Especialista");
+	MallaEspecialista->OnComponentHit.AddDynamic(this, &ANaveEspecialista::OnHit);
+
 	MallaEspecialista -> SetStaticMesh(ShipMesh.Object);
+	RootComponent = MallaEspecialista;
 
 	TiempoDisparo = 0.0f;
 	TiempoEscudo = 0.0f;
 
 	Velocidad = 100.0f;
+
+	Mensaje = 0;
+
 }
 
 // Called when the game starts or when spawned
@@ -32,6 +44,7 @@ void ANaveEspecialista::BeginPlay()
 	Super::BeginPlay();
 	
 	PosInicial = GetActorLocation();
+
 }
 
 // Called every frame
@@ -44,12 +57,18 @@ void ANaveEspecialista::Tick(float DeltaTime)
 	TiempoDisparo += DeltaTime;
 	TiempoEscudo += DeltaTime;
 
+	Estado_Actual();
+
 	Letalidad(Disparo);
 	Defender(Defensa);
+
 }
 
 void ANaveEspecialista::GenerearDiferentesEstados(FString _State)
 {
+	
+	EstadoActual = _State;
+
 	if (_State.Equals("Defensivo"))
 	{
 		EstadoNaveDefensa = GetWorld()->SpawnActor<AEstadoNaveDefensa>(AEstadoNaveDefensa::StaticClass());
@@ -172,6 +191,51 @@ void ANaveEspecialista::Giratorio(bool Girar)
 	}
 }
 
+void ANaveEspecialista::Estado_Actual()
+{
+
+	if (EstadoActual.Equals("Letal") && Mensaje == 0)
+	{
+		//GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, FString::Printf(TEXT("DesHabilitando Estados")));
+
+		Defender(false);
+		Giratorio(false);
+		Neutro(false);
+		
+		Mensaje++;
+	}
+	if (EstadoActual.Equals("Defensivo") && Mensaje == 1)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, FString::Printf(TEXT("DesHabilitando Estados")));
+
+		Letalidad(false);
+		Neutro(false);
+		Giratorio(false);
+
+		Mensaje++;
+	}
+	if (EstadoActual.Equals("Giratorio") && Mensaje == 2)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, FString::Printf(TEXT("DesHabilitando Estados")));
+
+		Letalidad(true);
+		Defender(true);
+		Neutro(false);
+
+		Mensaje++;
+	}
+	if (EstadoActual.Equals("Neutro") && Mensaje == 3)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, FString::Printf(TEXT("DesHabilitando Estados")));
+
+		Giratorio(false);
+		Defender(false);
+		Letalidad(false);
+
+		Mensaje++;
+	}
+}
+
 void ANaveEspecialista::Mover(float DeltaTime)
 {
 	FVector PosActual = GetActorLocation();
@@ -195,4 +259,18 @@ void ANaveEspecialista::Mover(float DeltaTime)
 	SetActorLocation(NuevaPos);
 	SetActorRotation(NuevaRot);
 }
+
+void ANaveEspecialista::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+{
+	if (OtherActor && OtherActor->IsA(AGalaga_USFX_L01Projectile::StaticClass()))
+	{
+		// Destruye el actor si colisiona con un proyectil
+		Destroy();
+
+		GEngine->AddOnScreenDebugMessage(-1, 20.f, FColor::Green, FString::Printf(TEXT("Nave Destruida")));
+	}
+	
+}
+
+
 

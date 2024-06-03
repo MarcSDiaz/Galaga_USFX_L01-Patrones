@@ -55,15 +55,22 @@ protected:
 
 	class ANaveEspecialista* NaveEspecialista;
 
+	class AGalaga_USFX_L01Pawn* Pawn;
 
 public:
 
 	TArray<ANaveSubscriptor_1*> NavesSub1;
 	TArray<ANaveSubscriptor_2*> NavesSub2;
 
+	TArray<ANaveEspecialista*> NavesEspeciales;
+
 	float TotalEnergy;
 	int V;
 
+	int Eliminados;
+
+	int NEspecialistas;
+	
 	FVector PosNavesSub1;
 	FVector PosNavesSub2;
 	FVector PosNaveEsp;

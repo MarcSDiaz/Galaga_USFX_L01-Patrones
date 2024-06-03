@@ -33,12 +33,12 @@ void AEstadoNaveNeutro::EnlazarNave(ANaveEspecialista* _NaveEsp)
 
 void AEstadoNaveNeutro::Neutral()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Red, FString::Printf(TEXT("La nave Enemiga esta en estado Neutral")));
+	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Blue, FString::Printf(TEXT("La nave Enemiga esta en estado Neutral")));
 
 	Nave->Neutro(true);
-	Nave->Giratorio(false);
+	/*Nave->Giratorio(false);
 	Nave->Defender(false);
-	Nave->Letalidad(false);
+	Nave->Letalidad(false);*/
 }
 
 FString AEstadoNaveNeutro::ObtenerEstado()

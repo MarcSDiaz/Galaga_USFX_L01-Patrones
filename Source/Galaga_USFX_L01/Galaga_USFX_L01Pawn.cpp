@@ -13,6 +13,12 @@
 #include "Kismet/GameplayStatics.h"
 #include "Sound/SoundBase.h"
 
+#include "EstrategiasNavePawn.h"
+#include "EstrategiaFrenesi.h"
+#include "EstrategiaProteccion.h"
+#include "EstrategiaVeloz.h" 
+#include "NaveEspecialista.h"
+
 const FName AGalaga_USFX_L01Pawn::MoveForwardBinding("MoveForward");
 const FName AGalaga_USFX_L01Pawn::MoveRightBinding("MoveRight");
 const FName AGalaga_USFX_L01Pawn::FireForwardBinding("FireForward");
@@ -50,6 +56,9 @@ AGalaga_USFX_L01Pawn::AGalaga_USFX_L01Pawn()
 	GunOffset = FVector(90.f, 0.f, 0.f);
 	FireRate = 0.1f;
 	bCanFire = true;
+
+	//Strategy
+	Repeticion = 0;
 }
 
 void AGalaga_USFX_L01Pawn::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
@@ -97,6 +106,10 @@ void AGalaga_USFX_L01Pawn::Tick(float DeltaSeconds)
 
 	// Try and fire a shot
 	FireShot(FireDirection);
+
+	//Strategy
+	AplicarEstrategias();
+
 }
 
 void AGalaga_USFX_L01Pawn::FireShot(FVector FireDirection)
@@ -136,4 +149,71 @@ void AGalaga_USFX_L01Pawn::ShotTimerExpired()
 {
 	bCanFire = true;
 }
+
+void AGalaga_USFX_L01Pawn::ModificarEstrategia(AActor* Strategy)
+{
+	Estrategia = Cast<IEstrategiasNavePawn>(Strategy);
+}
+
+void AGalaga_USFX_L01Pawn::EmplearEstrategia()
+{
+	if (Estrategia)
+	{
+		Estrategia->EmplearEstrategia(this);
+	}
+	else {
+		GEngine->AddOnScreenDebugMessage(-1, 20.f, FColor::Red, FString::Printf(TEXT("No se implemento ninguna Estrategia")));
+	}
+}
+
+void AGalaga_USFX_L01Pawn::AplicarEstrategias()
+{
+
+	if (Eliminados == 3 && Repeticion == 0)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 20.f, FColor::Red, FString::Printf(TEXT("Cantidad Destruida: %d"), Eliminados));
+
+		EFrenesi = GetWorld()->SpawnActor<AEstrategiaFrenesi>(AEstrategiaFrenesi::StaticClass());
+		ModificarEstrategia(EFrenesi);
+		EmplearEstrategia();
+
+		Repeticion++;
+	}
+	/*else if (Eliminados == 6 && Repeticion == 1)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 20.f, FColor::Red, FString::Printf(TEXT("Cantidad Destruida: %d"), Eliminados));
+
+		EProteccion = GetWorld()->SpawnActor<AEstrategiaProteccion>(AEstrategiaProteccion::StaticClass());
+		ModificarEstrategia(EProteccion);
+		EmplearEstrategia();
+
+		Repeticion++;
+	}*/
+	else if (Eliminados == 5 && Repeticion == 1)
+	{
+		if (EFrenesi)
+		{
+			EFrenesi->Destroy();
+		}
+
+		GEngine->AddOnScreenDebugMessage(-1, 20.f, FColor::Red, FString::Printf(TEXT("Cantidad Destruida: %d"), Eliminados));
+
+		EVeloz = GetWorld()->SpawnActor<AEstrategiaVeloz>(AEstrategiaVeloz::StaticClass());
+		ModificarEstrategia(EVeloz);
+		EmplearEstrategia();
+
+		Repeticion++;
+	}
+	else if (Eliminados == 9 && Repeticion == 2)
+	{
+		if (EVeloz)
+		{
+			EVeloz->Destroy();
+		}
+	}
+}
+
+
+
+
 

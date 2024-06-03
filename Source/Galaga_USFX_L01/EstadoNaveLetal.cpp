@@ -37,9 +37,9 @@ void AEstadoNaveLetal::Letal()
 	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Turquoise, FString::Printf(TEXT("La nave Enemiga esta en estado Letal")));
 
 	Nave->Letalidad(true);
-	Nave->Defender(false);
+	/*Nave->Defender(false);
 	Nave->Giratorio(false);
-	Nave->Neutro(false);
+	Nave->Neutro(false);*/
 
 	/*if (TiempoDisparo > 2.0f)
 	{

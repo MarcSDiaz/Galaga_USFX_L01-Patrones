@@ -36,9 +36,9 @@ void AEstadoNaveDefensa::Defensivo()
 	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Magenta, FString::Printf(TEXT("La nave Enemiga esta en estado Defensivo")));
 	
 	Nave->Defender(true);
-	Nave->Letalidad(false);
+	/*Nave->Letalidad(false);
 	Nave->Neutro(false);
-	Nave->Giratorio(false);
+	Nave->Giratorio(false);*/
 }
 
 FString AEstadoNaveDefensa::ObtenerEstado()

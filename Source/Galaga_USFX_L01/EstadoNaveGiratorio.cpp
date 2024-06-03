@@ -36,9 +36,9 @@ void AEstadoNaveGiratorio::Giratorio()
 	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Orange, FString::Printf(TEXT("La nave Enemiga esta en estado Giratorio")));
 
 	Nave->Giratorio(true);
-	Nave->Letalidad(true);
+	/*Nave->Letalidad(true);
 	Nave->Defender(true);
-	Nave->Neutro(false);
+	Nave->Neutro(false);*/
 }
 
 FString AEstadoNaveGiratorio::ObtenerEstado()

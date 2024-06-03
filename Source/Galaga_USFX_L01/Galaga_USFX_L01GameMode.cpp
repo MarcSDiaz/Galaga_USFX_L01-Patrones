@@ -2,6 +2,7 @@
 
 #include "Galaga_USFX_L01GameMode.h"
 #include "Galaga_USFX_L01Pawn.h"
+#include "Kismet/GameplayStatics.h"
 
 #include "Radar.h"
 #include "NaveSubscriptor_1.h"
@@ -31,7 +32,7 @@ AGalaga_USFX_L01GameMode::AGalaga_USFX_L01GameMode()
 
 	PosNavesSub1 = FVector(-700.0f, 200.0f, 200.0f);
 	PosNavesSub2 = FVector(-700.0f, 800.0f, 200.0f);
-	PosNaveEsp = FVector(1200.0f, -800.0f, 250.0f);
+	PosNaveEsp = FVector(1000.0f, -800.0f, 200.0f);
 
 	TotalEnergy = 30.0f;
 
@@ -40,6 +41,9 @@ AGalaga_USFX_L01GameMode::AGalaga_USFX_L01GameMode()
 	State = 1.0f;
 	Estado = 0;
 	_Facade = 0;
+
+	NEspecialistas = 10;
+	Eliminados = 0;
 }
 //void AGalaga_USFX_L01GameMode::BeginPlay()
 //{
@@ -85,6 +89,8 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
+	Pawn = Cast<AGalaga_USFX_L01Pawn>(UGameplayStatics::GetPlayerPawn(this, 0));
+
 	//PATRON FACADE
 
 	//Facade = GetWorld()->SpawnActor<AFacadeFormaciones>(AFacadeFormaciones::StaticClass());
@@ -123,43 +129,86 @@ void AGalaga_USFX_L01GameMode::BeginPlay()
 
 	//PATRON STATE
 
-	NaveEspecialista = GetWorld()->SpawnActor<ANaveEspecialista>(ANaveEspecialista::StaticClass());
-	NaveEspecialista->SetActorLocation(PosNaveEsp);
-
+	for (int i = 0; i < NEspecialistas; i++)
+	{
+		NaveEspecialista = GetWorld()->SpawnActor<ANaveEspecialista>(ANaveEspecialista::StaticClass());
+		NaveEspecialista->SetActorLocation(PosNaveEsp);
+		NavesEspeciales.Add(NaveEspecialista);
+		PosNaveEsp.X = PosNaveEsp.X - 200.0f;
+		PosNaveEsp.Y = PosNaveEsp.Y + 130.0f;
+	}
 }
 
 void AGalaga_USFX_L01GameMode::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime); 
 
+	for (ANaveEspecialista* Especialistas : NavesEspeciales)
+	{
+		if (Especialistas->IsPendingKill())
+		{
+			Eliminados++;
+			NavesEspeciales.Remove(Especialistas);
+
+		}
+	}
+
+	Pawn->SetEliminaciones(Eliminados);
+
 	//TiempoDeJuego += DeltaTime;
 
-	State += DeltaTime;
+	//PATRON STATE
+
+	/*State += DeltaTime;
 
 	if (State > 7.0f && Estado == 0)
 	{
-		NaveEspecialista->GenerearDiferentesEstados("Letal");
-		NaveEspecialista->EstadoLetal();
+		for (ANaveEspecialista* Especialistas : NavesEspeciales)
+		{
+			if (Especialistas)
+			{
+				Especialistas->GenerearDiferentesEstados("Letal");
+				Especialistas->EstadoLetal();
+			}
+		}
 		Estado++;
 	}
 	else if (State > 14.0f && Estado == 1)
 	{
-		NaveEspecialista->GenerearDiferentesEstados("Defensivo");
-		NaveEspecialista->EstadoDefensivo();
+		for (ANaveEspecialista* Especialistas : NavesEspeciales)
+		{
+			if (Especialistas)
+			{
+				Especialistas->GenerearDiferentesEstados("Defensivo");
+				Especialistas->EstadoDefensivo();
+			}
+		}
 		Estado++;
 	}
 	else if (State > 21.0f && Estado == 2)
 	{
-		NaveEspecialista->GenerearDiferentesEstados("Giratorio");
-		NaveEspecialista->EstadoGiratorio();
+		for (ANaveEspecialista* Especialistas : NavesEspeciales)
+		{
+			if (Especialistas)
+			{
+				Especialistas->GenerearDiferentesEstados("Giratorio");
+				Especialistas->EstadoGiratorio();
+			}
+		}
 		Estado++;
 	}
 	else if (State > 25.0f && Estado == 3)
 	{
-		NaveEspecialista->GenerearDiferentesEstados("Neutro");
-		NaveEspecialista->EstadoNeutral();
+		for (ANaveEspecialista* Especialistas : NavesEspeciales)
+		{
+			if (Especialistas)
+			{
+				Especialistas->GenerearDiferentesEstados("Neutro");
+				Especialistas->EstadoNeutral();
+			}
+		}
 		Estado++;
-	}
+	}*/
 
 	//PATRON OBSERVER
 

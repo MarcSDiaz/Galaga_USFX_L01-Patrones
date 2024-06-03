@@ -74,5 +74,27 @@ public:
 	FORCEINLINE class UCameraComponent* GetCameraComponent() const { return CameraComponent; }
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
+
+private: 
+
+	class IEstrategiasNavePawn* Estrategia;
+
+	class AEstrategiaFrenesi* EFrenesi;
+	class AEstrategiaProteccion* EProteccion;
+	class AEstrategiaVeloz* EVeloz;
+
+	class ANaveEspecialista* Especialista;
+
+public:
+
+	void ModificarEstrategia(AActor* Strategy);
+	void EmplearEstrategia();
+	void AplicarEstrategias();
+
+	int Eliminados;
+	int Repeticion;
+
+	void SetEliminaciones(int Eliminacion) { Eliminados = Eliminacion; }
+	void SetMoveSpeed(float Velocidad) { MoveSpeed = Velocidad; }
 };
 
